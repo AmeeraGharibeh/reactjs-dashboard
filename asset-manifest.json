@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AnaMakerReactDashboard/static/css/main.b0eb5aa0.css",
+    "main.js": "/AnaMakerReactDashboard/static/js/main.5083935d.js",
+    "index.html": "/AnaMakerReactDashboard/index.html",
+    "main.b0eb5aa0.css.map": "/AnaMakerReactDashboard/static/css/main.b0eb5aa0.css.map",
+    "main.5083935d.js.map": "/AnaMakerReactDashboard/static/js/main.5083935d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0eb5aa0.css",
+    "static/js/main.5083935d.js"
+  ]
+}
