@@ -2,7 +2,7 @@
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://AmeeraGharibeh.github.io/AnaMakerReactDashboard",
+  "homepage": "http://AmeeraGharibeh.github.io/reactjs-dashboard",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

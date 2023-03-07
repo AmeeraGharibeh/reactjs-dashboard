@@ -5,9 +5,12 @@ import SmallWidget from "../../SmallWidget/SmallWidget";
 import LargeWidget from "../../LargeWidget/LargeWidget";
 import { useEffect, useMemo, useState } from 'react';
 import { publicRequest } from "../../../apiRequest";
+import { useDispatch } from 'react-redux';
+import { getHome } from '../../../Redux/Repositories/HomeRepo';
 
 export default function Home() {
     const [userStats, setUserStats] = useState([]);
+    const dispatch = useDispatch();
 
   const MONTHS = useMemo(
     () => [
@@ -28,6 +31,7 @@ export default function Home() {
   );
 
   useEffect(() => {
+    getHome(dispatch);
     const getStats = async () => {
       try {
         const res = await publicRequest.get("/users/stats");

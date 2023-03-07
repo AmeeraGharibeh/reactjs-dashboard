@@ -1,5 +1,5 @@
 import { getStoresStart, getStoresSuccess, getStoresFailure,
-   addStoresStart, addStoresSuccess, addStoresFailure, resetState } from "../storesRedux";
+   addStoresStart, addStoresSuccess, addStoresFailure } from "../storesRedux";
 import { publicRequest } from "../../apiRequest";
 
 

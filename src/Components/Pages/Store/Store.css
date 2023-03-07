@@ -1,3 +1,55 @@
+.store {
+    flex: 4;
+    padding: 20px;
+}
+
+.storeTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.storeAddButton {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.storeTop {
+    display: flex;
+}
+
+.storeTopLeft,
+.storeTopRight {
+    flex: 1;
+}
+
+.storeTopRight {
+    padding: 20px;
+    margin: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+
+.storeInfoTop>img {
+    width: 50%;
+    border-radius: 10px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.storeInfoTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .storeName {
     font-weight: 600;
     margin-top: 12px;
@@ -8,9 +60,10 @@
 }
 
 .storeInfoItem {
-    width: 150px;
+    width: 100%;
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
 .storeInfoKey {

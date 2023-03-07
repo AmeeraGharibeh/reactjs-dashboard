@@ -12,11 +12,19 @@ export default function Store() {
     const location = useLocation();
     const storeId = location.pathname.split('/')[2];
     const [storeStats, setstoreStats] = useState([]) 
-    const store = useSelector((state)=> state.store.stores.find((s)=> s.id === storeId));
+    const stores = useSelector((state)=> state.store.stores);
+    const categories = useSelector((state)=> state.home.categories);
+
+    const store = useSelector((state)=> state.store.stores.find(s => s.id === parseInt(storeId)));
     const [inputs, setInputs] = useState({});
     const [file, setFile] = useState(null);
     const [cat, setCat] = useState([]);
     const dispatch = useDispatch();
+
+     const getCategory = ((id)=> {
+      const cat = categories.find(c => c.id === id);
+        return cat.name
+      })
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -36,6 +44,7 @@ export default function Store() {
   );
 
   useEffect(() => {
+    console.log('store is' + storeId.type)
     const getStats = async () => {
       try {
         const res = await publicRequest.get("orders/income?pid=" + storeId);
@@ -109,38 +118,27 @@ export default function Store() {
   return (
     <div className="store">
       <div className="storeTitleContainer">
-        <h1 className="storeTitle">Store</h1>
-        <Link to="/newstore">
-          <button className="storeAddButton">Create</button>
-        </Link> 
+        <h1 className="storeTitle">{store.name}</h1>
       </div>
       <div className="storeTop">
 
           <div className="storeTopRight">
-              <div className="storeInfoTop">
-                  <img src={store.picture_url}></img>
-                  <span className="storeName">{store.name}</span>
-              </div>
+             <div className="storeInfoItem">
+                      <span className="storeInfoKey">Owner ID:</span>
+                      <span className="storeInfoValue">{store.owner_id}</span>
+                  </div>
               <div className="storeInfoBottom">
                   <div className="storeInfoItem">
-                      <span className="storeInfoKey">id:</span>
-                      <span className="storeInfoValue">{store._id}</span>
+                      <span className="storeInfoKey">ID:</span>
+                      <span className="storeInfoValue">{store.id}</span>
                   </div>
                       <div className="storeInfoItem">
                       <span className="storeInfoKey">description:</span>
-                      <span className="storeInfoValue">{store.descreption}</span>
+                      <span className="storeInfoValue">{store.description}</span>
                   </div>
                    <div className="storeInfoItem">
                       <span className="storeInfoKey">categories:</span>
-                      <span className="storeInfoValue">{store.categories}</span>
-                  </div>
-                  <div className="storeInfoItem">
-                      <span className="storeInfoKey">price:</span>
-                      <span className="storeInfoValue">{store.price}$</span>
-                  </div>
-                  <div className="storeInfoItem">
-                      <span className="storeInfoKey">in stock:</span>
-                      <span className="storeInfoValue">{store.inStock? 'Yes' : 'No'}</span>
+                      <span className="storeInfoValue">{getCategory(store.category_id)}</span>
                   </div>
               </div>
           </div>
@@ -154,13 +152,6 @@ export default function Store() {
                   <input name="descreption" type="text" placeholder={store.descreption} onChange={handleChange}/>
                       <label>store Categories</label>
                   <input name="categories" type="text" placeholder={store.categories} onChange={handleCategories}/>
-                           <label>store Price</label>
-                  <input name="price" type="number" placeholder={store.price} onChange={handleChange}/>
-                  <label>In Stock</label>
-                  <select name="inStock" onChange={handleChange}>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                  </select>
                      <button onClick={handleClick} className="storeButton">Update</button>
               </div>
               <div className="storeFormRight">

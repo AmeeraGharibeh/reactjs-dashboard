@@ -60,7 +60,7 @@ useEffect(() => {
               <Route exact path="/newproduct" element={  <NewProduct />} />
               <Route exact path="/stores" element={  <StoreList />} />
               <Route exact path="/newstore" element={  <NewStore />} />
-              <Route exact path="/store" element={  <Store />} />
+              <Route exact path="/store/:storeId" element={  <Store />} />
 
 
         </Routes>

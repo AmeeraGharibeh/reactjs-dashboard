@@ -11,19 +11,23 @@ import { userRows } from "../../../dummydata";
 export default function StoreList() {
   const dispatch = useDispatch();
   const stores = useSelector((state)=> state.store.stores);
+  const categories = useSelector((state)=> state.home.categories);
+
   const limit = useSelector((state)=> state.store.Limit);
   const totalRows = useSelector(state => state.store.totalRows);
   const loading = useSelector(state => state.store.isFetching);
 
   const [currentPage, setCurrentPage] = useState(1);
 
-
   useEffect(()=> {
-
+    console.log('categories' + categories)
     getStores(dispatch, currentPage, limit);
   }, [dispatch, currentPage])
 
- 
+ const getCategory = ((id)=> {
+ const cat = categories.find(c => c.id === id);
+  return cat.name
+ })
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     {
@@ -51,6 +55,19 @@ export default function StoreList() {
       },
     },
     { field: "owner_id", headerName: "Owner ID", width: 150 },
+      {
+      field: "category_id",
+      headerName: "Category",
+      width: 250,
+      renderCell: (params) => {
+        return (
+          <div className="storeListItem">
+            {getCategory(params.row.category_id)}
+          </div>
+        );
+      },
+    },
+
  
     {
       field: "action",
