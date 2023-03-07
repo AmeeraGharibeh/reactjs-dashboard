@@ -1,32 +1,54 @@
 import './FeaturedInfo.css'
 import {ArrowDownward, ArrowUpward} from '@material-ui/icons'
+import { useEffect, useState } from 'react';
+import { publicRequest, userRequest } from '../../../apiRequest';
 
 export default function FeaturedInfo() {
+    const [income, setIncome] = useState([]);
+  const [perc, setPerc] = useState(0);
+
+  useEffect(() => {
+    const getIncome = async () => {
+      try {
+        const res = await publicRequest.get("orders/income");
+        setIncome(res.data);
+        setPerc((res.data[1].total * 100) / res.data[0].total - 100);
+      } catch (err){
+        console.log(err)
+      }
+    };
+    getIncome();
+  }, []);
   return (
     <div className='featured'>
         <div className="featuredItem">
             <span className="featuredTitle">Revanue</span>
             <div className="featuredMonyContainer">
-                <span className='featuredMoney'>2,555$</span>
-                <span className='featuredMoneyRate'>-20,5 <ArrowDownward className='featuredIcon negative'/></span>
+                <span className='featuredMoney'>${income[1]?.total}</span>
+                <span className='featuredMoneyRate'>
+             %{Math.floor(perc)}{" "}
+            {perc < 0 ? (
+              <ArrowDownward className="featuredIcon negative" />
+            ) : (
+              <ArrowUpward className="featuredIcon" />
+            )}
+                </span>
             </div>
             <span className='featuredSub'>Compared to last month</span>
 
         </div>
           <div className="featuredItem">
-            <span className="featuredTitle">Sales</span>
+            <span className="featuredTitle">Stores</span>
             <div className="featuredMonyContainer">
-                <span className='featuredMoney'>3000$</span>
-                <span className='featuredMoneyRate'>-11,5 <ArrowDownward className='featuredIcon negative'/></span>
+                <span className='featuredMoney'>300</span>
             </div>
             <span className='featuredSub'>Compared to last month</span>
 
         </div>
           <div className="featuredItem">
-            <span className="featuredTitle">Costs</span>
+            <span className="featuredTitle">Products</span>
             <div className="featuredMonyContainer">
-                <span className='featuredMoney'>2,555$</span>
-                <span className='featuredMoneyRate'>+20,5 <ArrowUpward className='featuredIcon'/></span>
+                <span className='featuredMoney'>2300</span>
             </div>
             <span className='featuredSub'>Compared to last month</span>
 

@@ -1,20 +1,29 @@
-
-
-.productList{
+.storeList {
     flex: 4;
+    width: 100%;
 }
-.productListItem {
+.newstorebutton{
     display: flex;
     flex-direction: row;
-    align-items: end;
     justify-content: end;
-    justify-self: end;
-    justify-items: end;
-    align-self: flex-end;
-    align-content: end;
+}
+.storeAddButton {
+    border: none;
+    padding: 5px 10px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.storeListItem {
+    text-align: right;
+    justify-content: flex-end;
 }
 
-.productListImg {
+.storeListImg {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -22,7 +31,7 @@
     margin-right: 10px;
 }
 
-.productListEdit {
+.storeListEdit {
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
@@ -32,7 +41,7 @@
     margin-right: 20px;
 }
 
-.productListDelete {
+.storeListDelete {
     color: red;
     cursor: pointer;
 }

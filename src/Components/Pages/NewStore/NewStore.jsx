@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./NewProduct.css";
+import "./NewStore.css";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../../Redux/Repositories/ProductsRepo";
+import { addStore } from "../../../Redux/Repositories/StoresRepo";
 
 
 
-export default function NewProduct() {
+export default function NewStore() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
@@ -46,44 +46,36 @@ export default function NewProduct() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = { ...inputs, img: downloadURL, categories: cat };
-          addProduct(product, dispatch);
+          const Store = { ...inputs, img: downloadURL, categories: cat };
+          addStore(Store, dispatch);
         });
       }
     );*/
+       const Store = { ...inputs };
+          addStore(Store, dispatch);
   }
   return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Product</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
+    <div className="newStore">
+      <h1 className="addStoreTitle">New Store</h1>
+      <form className="addStoreForm">
+        <div className="addStoreItem">
           <label>Image</label>
           <input type="file" id="file" onChange={e => setFile(e.target.files[0])} />
         </div>
-        <div className="addProductItem">
-          <label>Title</label>
-          <input name="title" type="text" placeholder="V-neck T-shirt" onChange={handleChange}/>
+       <div className="addStoreItem">
+          <label>Store Name</label>
+          <input name="name" type="text" placeholder="Type your store name" onChange={handleChange}/>
         </div>
-            <div className="addProductItem">
+            <div className="addStoreItem">
           <label>Description</label>
-          <input name="descreption" type="text" placeholder="white T-shirt" onChange={handleChange}/>
+          <input name="descreption" type="text" placeholder="Description" onChange={handleChange}/>
         </div>
-           <div className="addProductItem">
+           <div className="addStoreItem">
           <label>Categories</label>
-          <input name="categories" type="text" placeholder="jeans, coat.." onChange={handleCategories}/>
+          <input name="categories" type="text" placeholder="handmade, crochet" onChange={handleCategories}/>
         </div>
-          <div className="addProductItem">
-          <label>Price</label>
-          <input name="price" type="number" placeholder="100" onChange={handleChange}/>
-        </div>
-        <div className="addProductItem">
-          <label>Stock</label>
-          <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
-        <button onClick={handleClick} className="addProductButton">Create</button>
+        
+        <button onClick={handleClick} className="addStoreButton">Create</button>
       </form>
     </div>
   );

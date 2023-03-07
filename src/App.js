@@ -13,6 +13,11 @@ import Login from "./Components/Pages/Login/Login.jsx";
 import React from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import StoreList from "./Components/Pages/StoresList/StoresList.jsx";
+import NewStore from "./Components/Pages/NewStore/NewStore.jsx";
+import Store from "./Components/Pages/Store/Store.jsx";
+
 
 function App() {
 const navigate = useNavigate();
@@ -53,6 +58,11 @@ useEffect(() => {
               <Route exact path="/products" element={  <ProductList />} />
               <Route exact path="/product/:productId" element={  <Product />} />
               <Route exact path="/newproduct" element={  <NewProduct />} />
+              <Route exact path="/stores" element={  <StoreList />} />
+              <Route exact path="/newstore" element={  <NewStore />} />
+              <Route exact path="/store" element={  <Store />} />
+
+
         </Routes>
  </div>
 </>

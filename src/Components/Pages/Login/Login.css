@@ -36,3 +36,12 @@
     border: none;
     border-radius: 10px;
     background-color: rgb(232, 216, 245);}
+    .login-btn:disabled {
+        cursor: not-allowed;
+    }
+    .error{
+        font-size: 11px;
+        color: red;
+        margin-top: 10px;
+
+    }

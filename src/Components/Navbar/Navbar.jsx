@@ -1,30 +1,24 @@
 import React from 'react'
 import './Navbar.css'
-import {NotificationsNone, PersonOutline, Settings} from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import {ExitToApp, NotificationsNone, Settings} from '@material-ui/icons';
+import { logoutUser } from '../../Redux/Repositories/AuthRepo';
+
+
+
 export default function Navbar() {
+    const dispatch = useDispatch();
+    const handleLogout = (e)=> {
+      e.preventDefault();
+      logoutUser(dispatch);
+    };
   return (
     <div className='navbar'>
         <div className="navbarWrapper">
             <div className="navbar-left">
-                <span className='logo'>Dashboard</span>
+                <span className='logo'>AnaMaker</span>
             </div>
-                <div className="navbar-right">
-                  <Link to='/login' className='link'>
-                    <div className="username">
-                      <div className="iconsWrapper">
-                    <PersonOutline/>
-                  </div>                   
-                  <span>Login</span>
-                 </div></Link>
-                     <div className="iconsWrapper">
-                    <Settings/>
-                  </div>
-                  <div className="iconsWrapper">
-                      <NotificationsNone/>
-                    <span className='navbar-badge'>2</span>
-                  </div>
-                </div>
+      
                 </div>
                 </div>
   )
