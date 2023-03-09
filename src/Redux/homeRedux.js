@@ -4,6 +4,7 @@ export const homeSlice = createSlice({
     name: 'home',
     initialState : {
         categories : [],
+        countries : [],
         isFetching :  false,
         error : false,
     },
@@ -15,6 +16,7 @@ export const homeSlice = createSlice({
         getHomeSuccess: (state, action) =>{
             state.isFetching = false
             state.categories = action.payload['categories'];
+            state.countries = action.payload['countries']
         },
     
           getHomeFailure: (state)=> {

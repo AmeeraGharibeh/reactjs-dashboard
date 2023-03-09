@@ -3,11 +3,6 @@
     padding: 20px;
 }
 
-.storeTitleContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .storeAddButton {
     width: 80px;
@@ -36,25 +31,47 @@
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-
-.storeInfoTop>img {
-    width: 50%;
-    border-radius: 10px;
-    object-fit: contain;
-    margin-right: 20px;
-}
-
 .storeInfoTop {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    margin-left: 20px;
 }
 
 .storeName {
     font-weight: 600;
     margin-top: 12px;
 }
-
+.storeMiddle{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin: 20px;
+}
+.middleLeft{
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.middleRight{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+.storeCover {
+    width: 75%;
+    object-fit: contain;
+}
+.storeImg{
+    width: 50%;
+    object-fit: contain;
+}
 .storeInfoBottom {
     margin-top: 10px;
 }
@@ -110,12 +127,7 @@
     margin-bottom: 10px;
 }
 
-.storeUpload>img {
-    width: 100%;
-    border-radius: 10px;
-    object-fit: contain;
-    margin-right: 20px;
-}
+
 
 .storeFormRight {
     display: flex;
@@ -124,10 +136,7 @@
     flex: 1;
 }
 
-.storeUpload {
-    display: flex;
-    align-items: center;
-}
+
 
 .storeButton {
     border: none;
@@ -139,5 +148,4 @@
     font-weight: 600;
     cursor: pointer;
     align-self: stretch;
-
 }

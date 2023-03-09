@@ -9,6 +9,7 @@ export const storeSlice = createSlice({
         totalRows : 0,
         isFetching :  false,
         error : false,
+        isSuccess: false,
     },
     reducers: {
         getStoresStart: (state )=> {
@@ -34,9 +35,21 @@ export const storeSlice = createSlice({
         },
         addStoresSuccess: (state, action) =>{
             state.isFetching = false
-            state.stores.push(action.payload)
+            state.isSuccess = action.payload
         },
           addStoresFailure: (state)=> {
+            state.isFetching = false
+            state.error = true
+        },
+          updateStoreStart: (state)=> {
+            state.isFetching = true
+            state.error = false
+        },
+        updateStoreSuccess: (state, action) =>{
+            state.isFetching = false
+            state.stores[state.stores.findIndex((item)=> item.id === action.payload.id)] = action.payload.data
+        },
+          updateStoreFailure: (state)=> {
             state.isFetching = false
             state.error = true
         },
@@ -44,5 +57,6 @@ export const storeSlice = createSlice({
     }
 });
 export const { getStoresStart, getStoresSuccess, getStoresFailure, 
-               addStoresStart, addStoresSuccess, addStoresFailure,} = storeSlice.actions;
+               addStoresStart, addStoresSuccess, addStoresFailure,
+               updateStoreStart, updateStoreSuccess, updateStoreFailure} = storeSlice.actions;
 export default storeSlice.reducer;

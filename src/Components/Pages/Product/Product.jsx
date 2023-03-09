@@ -1,60 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
 import "./Product.css";
-import Chart from "../../Chart/Chart"
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
-import { publicRequest } from "../../../apiRequest";
-import { updateProduct } from "../../../Redux/Repositories/ProductsRepo";
+
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 export default function Product() {
     const location = useLocation();
     const productId = location.pathname.split('/')[2];
-    const [productStats, setProductStats] = useState([]) 
     const product = useSelector((state)=> state.product.products.find((p)=> p._id === productId));
     const [inputs, setInputs] = useState({});
     const [file, setFile] = useState(null);
     const [cat, setCat] = useState([]);
     const dispatch = useDispatch();
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Agu",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
 
-  useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await publicRequest.get("orders/income?pid=" + productId);
-        console.log(res.data);
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
-        list.map((item) =>
-          setProductStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], Sales: item.total },
-          ])
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getStats();
-  }, [productId, MONTHS]);
   
 
   const handleChange = (e)=> {
@@ -115,9 +75,7 @@ export default function Product() {
         </Link> 
       </div>
       <div className="productTop">
-          <div className="productTopLeft">
-              <Chart data={productStats} dataKey="Sales" title="Sales Performance"/>
-          </div>
+        
           <div className="productTopRight">
               <div className="productInfoTop">
                   <img src={product.img}></img>

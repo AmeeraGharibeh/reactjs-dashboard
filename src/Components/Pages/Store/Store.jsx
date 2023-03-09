@@ -1,127 +1,94 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Store.css";
-import Chart from "../../Chart/Chart"
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
-import { publicRequest } from "../../../apiRequest";
-import { updatestore } from "../../../Redux/Repositories/StoresRepo";
+import { useState } from "react";
+import axios from 'axios';
+import { useEffect } from "react";
+import DropdownMenu from "../../DropdownMenu";
 import { useDispatch } from "react-redux";
+import { updateStore } from "../../../Redux/Repositories/StoresRepo";
 
 export default function Store() {
     const location = useLocation();
     const storeId = location.pathname.split('/')[2];
-    const [storeStats, setstoreStats] = useState([]) 
-    const stores = useSelector((state)=> state.store.stores);
     const categories = useSelector((state)=> state.home.categories);
 
     const store = useSelector((state)=> state.store.stores.find(s => s.id === parseInt(storeId)));
     const [inputs, setInputs] = useState({});
-    const [file, setFile] = useState(null);
-    const [cat, setCat] = useState([]);
+    const [imageUrl, setImageUrl] = useState('');
+    const [coverUrl, setCoverUrl] = useState('');
+    const [selectedValue, setSelectedValue] = useState(null);
     const dispatch = useDispatch();
 
-     const getCategory = ((id)=> {
+    const handleDropdownChange = (value) => {
+      setSelectedValue(value);
+    };
+
+    const getCategory = ((id)=> {
       const cat = categories.find(c => c.id === id);
         return cat.name
       })
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Agu",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
 
-  useEffect(() => {
-    console.log('store is' + storeId.type)
-    const getStats = async () => {
-      try {
-        const res = await publicRequest.get("orders/income?pid=" + storeId);
-        console.log(res.data);
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
-        list.map((item) =>
-          setstoreStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], Sales: item.total },
-          ])
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getStats();
-  }, [storeId, MONTHS]);
-  
+
+      useEffect(() => {
+        setImageUrl(store['picture_url'])
+        setCoverUrl(store['cover_url'])
+      }, [])
 
   const handleChange = (e)=> {
     setInputs(prev => {
       return {...prev, [e.target.name]: e.target.value}
     })
   }
-   const handleCategories = (e)=> {
-    setCat(e.target.value.split(','));
-  }
+
+  
+    const uploadImage = (file) => {
+      const formData = new FormData();
+       formData.append('image', file);
+      formData.append('store_id', store.id)
+      return axios.post('https://app.momentoart.com/api/react/stores/change-picture', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+    };
+      const uploadCover = (file) => {
+      const formData = new FormData();
+       formData.append('image', file);
+      formData.append('store_id', store.id)
+      return axios.post('https://app.momentoart.com/api/react/stores/change-cover', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+    };
+
+   const handleFileUpload = async (file, type) => {
+      type === 1 ? await uploadCover(file).then(response => {
+        console.log('cover uploaded successfully', response.data);
+        setCoverUrl(response.data.picture_url);
+      })
+      .catch(error => {
+        console.error('Error uploading image', error);
+      }) 
+      : await uploadImage(file).then(response => {
+        console.log('Image uploaded successfully', response.data);
+        setImageUrl(response.data.picture_url) 
+      })
+      .catch(error => {
+        console.error('Error uploading image', error);
+      });
+    };
   const handleClick = (e)=> {
     e.preventDefault();
-   /* if(file !== null){
-      const filename = new Date().getTime() + file.name;
-    const storage = getStorage(app);
-     const storageRef = ref(storage, filename);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-        }
-      },
-      (error) => {
-        // Handle unsuccessful uploads
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const store = { ...inputs, img: downloadURL, categories: cat };
-          updatestore(storeId, store, dispatch);
-        });
-      }
-    );
-    }
-    else {
-    const store = {...inputs, ...(cat && {categories: cat})} ;
-    console.log(cat)
-    updatestore(storeId, store, dispatch);
-    } */
-   
+          const storeData = { ...inputs, category_id: selectedValue.id };
+          updateStore(store.id, storeData, dispatch);
   }
   return (
     <div className="store">
-      <div className="storeTitleContainer">
         <h1 className="storeTitle">{store.name}</h1>
-      </div>
       <div className="storeTop">
-
           <div className="storeTopRight">
              <div className="storeInfoItem">
                       <span className="storeInfoKey">Owner ID:</span>
@@ -143,6 +110,26 @@ export default function Store() {
               </div>
           </div>
       </div>
+      <div className="storeMiddle">
+        <div className="middleLeft">
+                {coverUrl && <img className="storeCover" src={coverUrl} alt="Uploaded cover" />}
+                      <label for="cover">
+                          <Publish/>
+                      </label>
+                      <span>Upload Store Cover</span>
+                     <input type="file" id="cover" style={{display:"none"}}
+                      onChange={(e) => handleFileUpload(e.target.files[0], 1)} /> 
+            </div>
+             <div className="middleRight">
+                 {imageUrl && <img className="storeImg" src={imageUrl} alt="Uploaded Image" />}
+                        <label for="pic">
+                            <Publish/>
+                        </label>
+                      <span>Upload Store Picture</span>
+                      <input type="file" id="pic" style={{display:"none"}}
+                      onChange={(e) => handleFileUpload(e.target.files[0], 0)} />
+          </div>
+        </div>
       <div className="storeBottom">
           <form className="storeForm">
               <div className="storeFormLeft">
@@ -151,19 +138,11 @@ export default function Store() {
                        <label>store Description</label>
                   <input name="descreption" type="text" placeholder={store.descreption} onChange={handleChange}/>
                       <label>store Categories</label>
-                  <input name="categories" type="text" placeholder={store.categories} onChange={handleCategories}/>
+                     <DropdownMenu options={categories} onDropdownChange={handleDropdownChange}/>
+
                      <button onClick={handleClick} className="storeButton">Update</button>
               </div>
-              <div className="storeFormRight">
-                  <div className="storeUpload">
-                      <img src={store.img}></img>
-                      <label for="file">
-                          <Publish/>
-                      </label>
-                      <input type="file" id="file" style={{display:"none"}}
-                       onChange={e => setFile(e.target.files[0])}/>
-                  </div>
-              </div>
+            
           </form>
       </div>
     </div>
