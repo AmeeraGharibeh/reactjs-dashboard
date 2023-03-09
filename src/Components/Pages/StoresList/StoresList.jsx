@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import {getStores} from '../../../Redux/Repositories/StoresRepo'
-import { userRows } from "../../../dummydata";
 
 
 export default function StoreList() {
@@ -24,6 +23,7 @@ export default function StoreList() {
     getStores(dispatch, currentPage, limit);
   }, [dispatch, currentPage])
 
+  
  const getCategory = ((id)=> {
  const cat = categories.find(c => c.id === id);
   return cat.name
