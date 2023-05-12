@@ -52,6 +52,7 @@ useEffect(() => {
     <Sidebar/>
     <Routes>
               <Route exact path="/" element={<Home />} />
+
               <Route exact path="/user" element={<UserList />} />
               <Route exact path="/user/:userId" element={  <User />} />
               <Route exact path="/newUser" element={  <NewUser />} />

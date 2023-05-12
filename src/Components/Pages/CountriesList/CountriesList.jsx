@@ -4,23 +4,22 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux'
-///import {getCountries} from '../../../Redux/Repositories/CountriesRepo'
+import {getCountries} from '../../../Redux/Repositories/CountriesRepo'
 
 
 export default function CountriesList() {
   const dispatch = useDispatch();
-  //const countries = useSelector((state)=> state.country.countries);
+  const countries = useSelector((state)=> state.country.countries);
   //const categories = useSelector((state)=> state.home.categories);
 
-  //const limit = useSelector((state)=> state.country.Limit);
-  //const totalRows = useSelector(state => state.country.totalRows);
-  //const loading = useSelector(state => state.country.isFetching);
+  const limit = useSelector((state)=> state.country.Limit);
+  
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(()=> {
    // console.log('categories' + categories)
-   // getCountries(dispatch, currentPage, limit);
+    getCountries(dispatch, currentPage, limit);
   }, [dispatch, currentPage])
 
   
@@ -28,45 +27,33 @@ export default function CountriesList() {
  //const cat = categories.find(c => c.id === id);
  // return cat.name})
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
+    { field: "_id", headerName: "ID", width: 100 },
     {
-      field: "picture_url",
+      field: "img_url",
       headerName: "Picture",
-      width: 100,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="countryListItem">
-            <img className="countryListImg" src={params.row.picture_url} alt="" />
+            <img className="countryListImg" src={params.row.img_url} alt="" />
           </div>
         );
       },
     },
     {
-      field: "name",
+      field: "name_ar",
       headerName: "Country",
-      width: 250,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="countryListItem">
-            {params.row.name}
+            {params.row.name_ar}
           </div>
         );
       },
     },
-    { field: "owner_id", headerName: "Owner ID", width: 150 },
-      {
-      field: "category_id",
-      headerName: "Category",
-      width: 250,
-      renderCell: (params) => {
-        return (
-          <div className="countryListItem">
-        
-          </div>
-        );
-      },
-    },
-
+    { field: "rooms_count", headerName: "Rooms", width: 150 },
+    { field: "users_count", headerName: "Users", width: 150 },
  
     {
       field: "action",
@@ -96,7 +83,14 @@ export default function CountriesList() {
           <button className="countryAddButton">Add New country</button>
         </Link> 
        </div>
-
+ <DataGrid
+        rows={countries}
+        disableSelectionOnClic
+        columns={columns}
+        getRowId= {(row) => row._id}
+        pageSize={8}
+        checkboxSelection
+      />
     </div>
     </>  
   

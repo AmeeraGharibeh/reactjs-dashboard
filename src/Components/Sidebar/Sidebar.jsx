@@ -1,7 +1,7 @@
 import './Sidebar.css';
 import { Link } from "react-router-dom";
 
-import {LineStyle,  PersonOutline, PublicOutlined, SettingsOutlined, ForumOutlined} from '@material-ui/icons'
+import {LineStyle,  PersonOutline, PublicOutlined, ForumOutlined, Star} from '@material-ui/icons'
 import { useState } from 'react';
 
 export default function Sidebar() {
@@ -15,32 +15,32 @@ export default function Sidebar() {
             <Link to="/" className="link">
             <li className="sidebarListItem" onClick={() => {setIndex(1)}}>
               <LineStyle/>
-            <div className='label'>Home
+            <div className='label'>لوحة التحكم
             {index === 1 && <div className="active"></div>}
             </div>
             </li></Link>
                 <Link to="/user" className="link">
             <li className="sidebarListItem" onClick={() => {setIndex(2)}}><PersonOutline/>
             <div className='label'>
-            Users
+            إدارة المستخدمين
             {index === 2 && <div className="active"></div>}
             </div></li></Link>
                <Link to="/countries" className="link">
             <li className="sidebarListItem" onClick={() => {setIndex(3)}}><PublicOutlined/>
             <div className='label'>
-            Countries
+            إدارة الشبكات
            {index === 3 && <div className="active"></div>}
             </div></li></Link>
             <Link to="/rooms" className="link">
             <li className="sidebarListItem" onClick={() => {setIndex(4)}}><ForumOutlined/>
             <div className='label'>
-            Rooms
+            إدارة الغرف
            {index === 4 && <div className="active"></div>}
             </div></li></Link>
             <Link to="/categories" className="link">
-            <li className="sidebarListItem" onClick={() => {setIndex(5)}}><SettingsOutlined/>
+            <li className="sidebarListItem" onClick={() => {setIndex(5)}}><Star/>
             <div className='label'>
-            Advanced
+            إدارة الأسماء
            {index === 5 && <div className="active"></div>}
             </div></li></Link>
           </ul>

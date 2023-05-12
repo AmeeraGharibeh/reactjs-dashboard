@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
-import productReducer from "./productsRedux";
-import storeReducer from "./storesRedux";
+import countryReducer from "./CountriesRedux";
+import roomReducer from "./RoomsRedux";
 import homeReducer from "./homeRedux";
 
 
@@ -25,8 +25,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  product: productReducer,
-  store: storeReducer,
+  country: countryReducer,
+  room: roomReducer,
   home: homeReducer
 });
 

@@ -2,39 +2,34 @@ import "./RoomsList.css";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux'
-//import {deleteRoom, getRooms} from '../../../Redux/Repositories/RoomsRepo'
+import { getRooms} from '../../../Redux/Repositories/RoomsRepo'
 
 export default function RoomsList() {
   const dispatch = useDispatch();
-  //const rooms = useSelector((state)=> state.rooms.rooms)
+  const rooms = useSelector((state)=> state.room.rooms)
+    const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(()=> {
-    //getrooms(dispatch);
-  }, [dispatch])
+    getRooms(currentPage, 10, dispatch);
+  }, [dispatch, currentPage])
   const handleDelete = (id) => {
-    //deleterooms(id, dispatch);
+    //deleteRooms(id, dispatch);
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "_id", headerName: "ID", width: 100 },
+
+    { field: "room_name", headerName: "Name", width: 200 },
     {
-      field: "img",
-      headerName: "Room",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="roomsListItem">
-            <img className="roomsListImg" src={params.row.img} alt="" />
-            {params.row.title}
-          </div>
-        );
-      },
+      field: "room_owner",
+      headerName: "Owner",
+      width: 160,
     },
-    { field: "inStock", headerName: "Stock", width: 200 },
-    {
-      field: "price",
-      headerName: "Price",
+     {
+      field: "room_country",
+      headerName: "Country",
       width: 160,
     },
     {
@@ -64,6 +59,14 @@ export default function RoomsList() {
           <button className="roomAddButton">Add new room</button>
         </Link>
       </div>
+        <DataGrid
+        rows={rooms}
+        disableSelectionOnClic
+        columns={columns}
+        getRowId= {(row) => row._id}
+        pageSize={8}
+        checkboxSelection
+      />
     </div>
   );
 }

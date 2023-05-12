@@ -5,7 +5,7 @@ import axios from "axios";
 export const getHome = async (dispatch) => {
   dispatch(getHomeStart());
   try {
-    const res = await axios.get('https://6i308wcxza.execute-api.eu-west-1.amazonaws.com/api/home',);
+    const res = await axios.get('localhost:5000/',);
     console.log(res)
     dispatch(getHomeSuccess(res.data));
   } catch (err) {
