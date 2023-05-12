@@ -1,35 +1,36 @@
-.newProduct {
+.newCountry {
     flex: 4;
     margin-left: 20px;
 }
 
-.addProductForm {
+.addCountryForm {
     margin-top: 10px;
 }
 
-.addProductItem {
+.addCountryItem {
     width: 250px;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.addProductItem>label {
+.addCountryItem>label {
     color: gray;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.addProductItem>input {
+.addCountryItem>input {
     padding: 10px;
 }
 
-.addProductItem>select {
+.addCountryItem>select {
     padding: 10px;
 }
 
-.addProductButton {
+.addCountryButton {
     margin-top: 10px;
+    margin-bottom: 20px;
     padding: 7px 10px;
     border: none;
     border-radius: 10px;

@@ -1,10 +1,10 @@
-.store {
+.country {
     flex: 4;
     padding: 20px;
 }
 
 
-.storeAddButton {
+.countryAddButton {
     width: 80px;
     border: none;
     padding: 5px;
@@ -15,34 +15,34 @@
     cursor: pointer;
 }
 
-.storeTop {
+.countryTop {
     display: flex;
 }
 
-.storeTopLeft,
-.storeTopRight {
+.countryTopLeft,
+.countryTopRight {
     flex: 1;
 }
 
-.storeTopRight {
+.countryTopRight {
     padding: 20px;
     margin: 20px;
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.storeInfoTop {
+.countryInfoTop {
     display: flex;
     flex-direction: column;
     align-items: start;
     margin-left: 20px;
 }
 
-.storeName {
+.countryName {
     font-weight: 600;
     margin-top: 12px;
 }
-.storeMiddle{
+.countryMiddle{
     display: flex;
     flex-direction: row;
     gap: 25px;
@@ -64,72 +64,72 @@
     gap: 15px;
     justify-content: center;
 }
-.storeCover {
+.countryCover {
     width: 75%;
     object-fit: contain;
 }
-.storeImg{
+.countryImg{
     width: 50%;
     object-fit: contain;
 }
-.storeInfoBottom {
+.countryInfoBottom {
     margin-top: 10px;
 }
 
-.storeInfoItem {
+.countryInfoItem {
     width: 100%;
     display: flex;
     gap: 15px;
     margin-bottom: 10px;
 }
 
-.storeInfoKey {
+.countryInfoKey {
     font-weight: 500;
 
 }
 
-.storeInfoValue {
+.countryInfoValue {
     font-weight: 300;
 }
 
-.storeBottom {
+.countryBottom {
     padding: 20px;
     margin: 20px;
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.storeForm {
+.countryForm {
     display: flex;
     justify-content: space-between;
 }
 
-.storeFormLeft {
+.countryFormLeft {
     display: flex;
     flex-direction: column;
     flex: 2;
     margin-right: 30px;
 }
 
-.storeFormLeft>label {
+.countryFormLeft>label {
     margin-bottom: 10px;
     color: gray;
 }
 
-.storeFormLeft>input {
+.countryFormLeft>input {
     margin-bottom: 20px;
     border: none;
     padding: 5px;
     border-bottom: 1px solid gray;
 }
 
-.storeFormLeft>select {
+.countryFormLeft>select {
     margin-bottom: 10px;
 }
 
 
 
-.storeFormRight {
+.countryFormRight {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -138,7 +138,7 @@
 
 
 
-.storeButton {
+.countryButton {
     border: none;
     margin-top: 20px;
     padding: 5px;

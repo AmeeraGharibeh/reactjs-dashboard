@@ -16,7 +16,7 @@ export default function Navbar() {
     <div className='navbar'>
         <div className="navbarWrapper">
             <div className="navbar-left">
-                <span className='logo'>AnaMaker</span>
+                <span className='logo'>Live Chat</span>
             </div>
       
                 </div>

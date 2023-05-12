@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import "./Store.css";
+import "./Country.css";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -7,14 +7,14 @@ import axios from 'axios';
 import { useEffect } from "react";
 import DropdownMenu from "../../DropdownMenu";
 import { useDispatch } from "react-redux";
-import { updateStore } from "../../../Redux/Repositories/StoresRepo";
+//import { updateCountry } from "../../../Redux/Repositories/CountrysRepo";
 
-export default function Store() {
+export default function Country() {
     const location = useLocation();
-    const storeId = location.pathname.split('/')[2];
+    const countryId = location.pathname.split('/')[2];
     const categories = useSelector((state)=> state.home.categories);
 
-    const store = useSelector((state)=> state.store.stores.find(s => s.id === parseInt(storeId)));
+    const country = useSelector((state)=> state.country.countrys.find(s => s.id === parseInt(countryId)));
     const [inputs, setInputs] = useState({});
     const [imageUrl, setImageUrl] = useState('');
     const [coverUrl, setCoverUrl] = useState('');
@@ -32,8 +32,8 @@ export default function Store() {
 
 
       useEffect(() => {
-        setImageUrl(store['picture_url'])
-        setCoverUrl(store['cover_url'])
+        setImageUrl(country['picture_url'])
+        setCoverUrl(country['cover_url'])
       }, [])
 
   const handleChange = (e)=> {
@@ -46,8 +46,8 @@ export default function Store() {
     const uploadImage = (file) => {
       const formData = new FormData();
        formData.append('image', file);
-      formData.append('store_id', store.id)
-      return axios.post('https://app.momentoart.com/api/react/stores/change-picture', formData, {
+      formData.append('country_id', country.id)
+      return axios.post('', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -56,8 +56,8 @@ export default function Store() {
       const uploadCover = (file) => {
       const formData = new FormData();
        formData.append('image', file);
-      formData.append('store_id', store.id)
-      return axios.post('https://app.momentoart.com/api/react/stores/change-cover', formData, {
+      formData.append('country_id', country.id)
+      return axios.post('', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -82,65 +82,65 @@ export default function Store() {
     };
   const handleClick = (e)=> {
     e.preventDefault();
-          const storeData = { ...inputs, category_id: selectedValue.id };
-          updateStore(store.id, storeData, dispatch);
+          const countryData = { ...inputs, category_id: selectedValue.id };
+         // updatecountry(country.id, countryData, dispatch);
   }
   return (
-    <div className="store">
-        <h1 className="storeTitle">{store.name}</h1>
-      <div className="storeTop">
-          <div className="storeTopRight">
-             <div className="storeInfoItem">
-                      <span className="storeInfoKey">Owner ID:</span>
-                      <span className="storeInfoValue">{store.owner_id}</span>
+    <div className="country">
+        <h1 className="countryTitle">{country.name}</h1>
+      <div className="countryTop">
+          <div className="countryTopRight">
+             <div className="countryInfoItem">
+                      <span className="countryInfoKey">Owner ID:</span>
+                      <span className="countryInfoValue">{country.owner_id}</span>
                   </div>
-              <div className="storeInfoBottom">
-                  <div className="storeInfoItem">
-                      <span className="storeInfoKey">ID:</span>
-                      <span className="storeInfoValue">{store.id}</span>
+              <div className="countryInfoBottom">
+                  <div className="countryInfoItem">
+                      <span className="countryInfoKey">ID:</span>
+                      <span className="countryInfoValue">{country.id}</span>
                   </div>
-                      <div className="storeInfoItem">
-                      <span className="storeInfoKey">description:</span>
-                      <span className="storeInfoValue">{store.description}</span>
+                      <div className="countryInfoItem">
+                      <span className="countryInfoKey">description:</span>
+                      <span className="countryInfoValue">{country.description}</span>
                   </div>
-                   <div className="storeInfoItem">
-                      <span className="storeInfoKey">categories:</span>
-                      <span className="storeInfoValue">{getCategory(store.category_id)}</span>
+                   <div className="countryInfoItem">
+                      <span className="countryInfoKey">categories:</span>
+                      <span className="countryInfoValue">{getCategory(country.category_id)}</span>
                   </div>
               </div>
           </div>
       </div>
-      <div className="storeMiddle">
+      <div className="countryMiddle">
         <div className="middleLeft">
-                {coverUrl && <img className="storeCover" src={coverUrl} alt="Uploaded cover" />}
+                {coverUrl && <img className="countryCover" src={coverUrl} alt="Uploaded cover" />}
                       <label for="cover">
                           <Publish/>
                       </label>
-                      <span>Upload Store Cover</span>
+                      <span>Upload country Cover</span>
                      <input type="file" id="cover" style={{display:"none"}}
                       onChange={(e) => handleFileUpload(e.target.files[0], 1)} /> 
             </div>
              <div className="middleRight">
-                 {imageUrl && <img className="storeImg" src={imageUrl} alt="Uploaded Image" />}
+                 {imageUrl && <img className="countryImg" src={imageUrl} alt="Uploaded Image" />}
                         <label for="pic">
                             <Publish/>
                         </label>
-                      <span>Upload Store Picture</span>
+                      <span>Upload country Picture</span>
                       <input type="file" id="pic" style={{display:"none"}}
                       onChange={(e) => handleFileUpload(e.target.files[0], 0)} />
           </div>
         </div>
-      <div className="storeBottom">
-          <form className="storeForm">
-              <div className="storeFormLeft">
-                  <label>store Name</label>
-                  <input name="title" type="text" placeholder={store.title} onChange={handleChange}/>
-                       <label>store Description</label>
-                  <input name="descreption" type="text" placeholder={store.descreption} onChange={handleChange}/>
-                      <label>store Categories</label>
+      <div className="countryBottom">
+          <form className="countryForm">
+              <div className="countryFormLeft">
+                  <label>country Name</label>
+                  <input name="title" type="text" placeholder={country.title} onChange={handleChange}/>
+                       <label>country Description</label>
+                  <input name="descreption" type="text" placeholder={country.descreption} onChange={handleChange}/>
+                      <label>country Categories</label>
                      <DropdownMenu options={categories} onDropdownChange={handleDropdownChange}/>
 
-                     <button onClick={handleClick} className="storeButton">Update</button>
+                     <button onClick={handleClick} className="countryButton">Update</button>
               </div>
             
           </form>

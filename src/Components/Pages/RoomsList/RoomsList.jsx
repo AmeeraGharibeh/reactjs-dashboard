@@ -1,31 +1,31 @@
-import "./ProductList.css";
+import "./RoomsList.css";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
-import {deleteProduct, getProducts} from '../../../Redux/Repositories/ProductsRepo'
+//import {deleteRoom, getRooms} from '../../../Redux/Repositories/RoomsRepo'
 
-export default function ProductList() {
+export default function RoomsList() {
   const dispatch = useDispatch();
-  const products = useSelector((state)=> state.product.products)
+  //const rooms = useSelector((state)=> state.rooms.rooms)
   useEffect(()=> {
-    getProducts(dispatch);
+    //getrooms(dispatch);
   }, [dispatch])
   const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
+    //deleterooms(id, dispatch);
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
       field: "img",
-      headerName: "Product",
+      headerName: "Room",
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
+          <div className="roomsListItem">
+            <img className="roomsListImg" src={params.row.img} alt="" />
             {params.row.title}
           </div>
         );
@@ -44,11 +44,11 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
+            <Link to={"/rooms/" + params.row._id}>
+              <button className="roomsListEdit">Edit</button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="roomsListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
@@ -58,15 +58,12 @@ export default function ProductList() {
   ];
 
   return (     
-    <div className="productList">
-      <DataGrid
-        rows={products}
-        disableSelectionOnClic
-        columns={columns}
-        getRowId= {(row) => row._id}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div className="roomsList">
+    <div className="addButtonContainer">
+        <Link to="/newRoom">
+          <button className="roomAddButton">Add new room</button>
+        </Link>
+      </div>
     </div>
   );
 }

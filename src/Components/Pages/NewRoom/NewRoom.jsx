@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./NewProduct.css";
+import "./NewRoom.css";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../../Redux/Repositories/ProductsRepo";
+//import { addRoom } from "../../../Redux/Repositories/RoomsRepo";
 
 
 
-export default function NewProduct() {
+export default function NewRoom() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
@@ -46,44 +46,44 @@ export default function NewProduct() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = { ...inputs, img: downloadURL, categories: cat };
-          addProduct(product, dispatch);
+          const Room = { ...inputs, img: downloadURL, categories: cat };
+          addRoom(Room, dispatch);
         });
       }
     );*/
   }
   return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Product</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
+    <div className="newRoom">
+      <h1 className="addRoomTitle">New Room</h1>
+      <form className="addRoomForm">
+        <div className="addRoomItem">
           <label>Image</label>
           <input type="file" id="file" onChange={e => setFile(e.target.files[0])} />
         </div>
-        <div className="addProductItem">
+        <div className="addRoomItem">
           <label>Title</label>
           <input name="title" type="text" placeholder="V-neck T-shirt" onChange={handleChange}/>
         </div>
-            <div className="addProductItem">
+            <div className="addRoomItem">
           <label>Description</label>
           <input name="descreption" type="text" placeholder="white T-shirt" onChange={handleChange}/>
         </div>
-           <div className="addProductItem">
+           <div className="addRoomItem">
           <label>Categories</label>
           <input name="categories" type="text" placeholder="jeans, coat.." onChange={handleCategories}/>
         </div>
-          <div className="addProductItem">
+          <div className="addRoomItem">
           <label>Price</label>
           <input name="price" type="number" placeholder="100" onChange={handleChange}/>
         </div>
-        <div className="addProductItem">
+        <div className="addRoomItem">
           <label>Stock</label>
           <select name="inStock" onChange={handleChange}>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
         </div>
-        <button onClick={handleClick} className="addProductButton">Create</button>
+        <button onClick={handleClick} className="addRoomButton">Create</button>
       </form>
     </div>
   );

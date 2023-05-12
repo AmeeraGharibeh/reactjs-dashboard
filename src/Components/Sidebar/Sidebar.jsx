@@ -1,9 +1,7 @@
 import './Sidebar.css';
 import { Link } from "react-router-dom";
 
-import {LineStyle, Timeline, TrendingUp, MoneyOutlined,
-   CategoryOutlined, PersonOutline,
-    Transform, ReportProblemOutlined, NotificationsOutlined, ShoppingCartOutlined, StoreOutlined, ShoppingBasketOutlined} from '@material-ui/icons'
+import {LineStyle,  PersonOutline, PublicOutlined, SettingsOutlined, ForumOutlined} from '@material-ui/icons'
 import { useState } from 'react';
 
 export default function Sidebar() {
@@ -27,22 +25,22 @@ export default function Sidebar() {
             Users
             {index === 2 && <div className="active"></div>}
             </div></li></Link>
-               <Link to="/stores" className="link">
-            <li className="sidebarListItem" onClick={() => {setIndex(3)}}><StoreOutlined/>
+               <Link to="/countries" className="link">
+            <li className="sidebarListItem" onClick={() => {setIndex(3)}}><PublicOutlined/>
             <div className='label'>
-            Stores
+            Countries
            {index === 3 && <div className="active"></div>}
             </div></li></Link>
-            <Link to="/products" className="link">
-            <li className="sidebarListItem" onClick={() => {setIndex(4)}}><ShoppingBasketOutlined/>
+            <Link to="/rooms" className="link">
+            <li className="sidebarListItem" onClick={() => {setIndex(4)}}><ForumOutlined/>
             <div className='label'>
-            Products
+            Rooms
            {index === 4 && <div className="active"></div>}
             </div></li></Link>
             <Link to="/categories" className="link">
-            <li className="sidebarListItem" onClick={() => {setIndex(5)}}><CategoryOutlined/>
+            <li className="sidebarListItem" onClick={() => {setIndex(5)}}><SettingsOutlined/>
             <div className='label'>
-            Categories
+            Advanced
            {index === 5 && <div className="active"></div>}
             </div></li></Link>
           </ul>

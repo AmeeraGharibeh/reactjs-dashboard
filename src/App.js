@@ -6,17 +6,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserList from "./Components/Pages/UsersList/UserList.jsx";
 import User from "./Components/Pages/User/User.jsx";
 import NewUser from "./Components/Pages/NewUser/NewUser.jsx";
-import ProductList from "./Components/Pages/ProductList/ProductList.jsx";
-import Product from "./Components/Pages/Product/Product.jsx";
-import NewProduct from "./Components/Pages/NewProduct/NewProduct.jsx";
+import RoomsList from "./Components/Pages/RoomsList/RoomsList.jsx";
+import Room from "./Components/Pages/Room/Room.jsx";
+import NewRoom from "./Components/Pages/NewRoom/NewRoom.jsx";
 import Login from "./Components/Pages/Login/Login.jsx";
 import React from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import StoreList from "./Components/Pages/StoresList/StoresList.jsx";
-import NewStore from "./Components/Pages/NewStore/NewStore.jsx";
-import Store from "./Components/Pages/Store/Store.jsx";
+import CountriesList from "./Components/Pages/CountriesList/CountriesList.jsx";
+import NewCountry from "./Components/Pages/NewCountry/NewCountry.jsx";
+import Country from "./Components/Pages/Country/Country.jsx";
 
 
 function App() {
@@ -55,12 +55,14 @@ useEffect(() => {
               <Route exact path="/user" element={<UserList />} />
               <Route exact path="/user/:userId" element={  <User />} />
               <Route exact path="/newUser" element={  <NewUser />} />
-              <Route exact path="/products" element={  <ProductList />} />
-              <Route exact path="/product/:productId" element={  <Product />} />
-              <Route exact path="/newproduct" element={  <NewProduct />} />
-              <Route exact path="/stores" element={  <StoreList />} />
-              <Route exact path="/newstore" element={  <NewStore />} />
-              <Route exact path="/store/:storeId" element={  <Store />} />
+
+              <Route exact path="/rooms" element={  <RoomsList />} />
+              <Route exact path="/room/:roomId" element={  <Room />} />
+              <Route exact path="/newroom" element={  <NewRoom />} />
+              
+              <Route exact path="/countries" element={  <CountriesList />} />
+              <Route exact path="/newcountry" element={  <NewCountry />} />
+              <Route exact path="/country/:countryId" element={  <Country />} />
 
 
         </Routes>
